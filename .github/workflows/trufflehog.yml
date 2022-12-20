@@ -11,11 +11,12 @@ jobs:
       - name: Get number of commits in branche
         run: |
           ls
-          echo "commit_count=$(git log --oneline master..HEAD | wc -l)" >> $GITHUB_ENV
+          # echo "commit_count=$(git log --oneline master..HEAD | wc -l)" >> $GITHUB_ENV
+          COMMIT_COUNT=$(git rev-list ${GITHUB_SHA}..${GITHUB_BASE_REF})
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
           base: ${{ github.event.pull_request.base.ref }}
           head: HEAD
-          extra_args: --debug --only-verified --max-depth=${{ steps.cdc.commit-difference-count }}
+          extra_args: --debug --only-verified --max-depth=$COMMIT_COUNT
