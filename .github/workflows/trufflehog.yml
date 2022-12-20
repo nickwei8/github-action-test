@@ -8,18 +8,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      # - name: Get number of commits in branche
-      #   run: |
-      #     ls
-      #     git checkout ${{ env.BRANCH }}
-      #     git rev-list master..HEAD | wc -l
-      #     echo "commit_count=$(git rev-list --count master..HEAD)" >> $GITHUB_ENV
-      - name: Get Commit Difference Count Between Two Branches
-        id: cdc
-        uses: jessicalostinspace/commit-difference-action@v1.0.0
-        with:
-          base-branch: HEAD
-          secondary-branch: 'master'
+      - name: Get number of commits in branche
+        run: |
+          ls
+          echo "commit_count=$(git log --oneline master..HEAD | wc -l)" >> $GITHUB_ENV
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@main
         with:
