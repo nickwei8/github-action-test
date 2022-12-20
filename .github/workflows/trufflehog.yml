@@ -11,7 +11,7 @@ jobs:
       - name: Get number of commits in branche
         run: |
           ls
-          git
+          git rev-list
           echo "commit_count=$(git rev-list --count master..HEAD)" >> $GITHUB_ENV
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@main
