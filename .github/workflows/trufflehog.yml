@@ -8,13 +8,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
+      # - name: Setup upterm session
+      #   uses: lhotari/action-upterm@v1
       - name: Get number of commits in branche
         run: |
           ls
           # echo "commit_count=$(git log --oneline master..HEAD | wc -l)" >> $GITHUB_ENV
-          COMMIT_COUNT=$(git rev-list ${GITHUB_SHA}..${GITHUB_BASE_REF})
+          COMMIT_COUNT=$(git rev-list refs/heads/master.. --count)
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@main
         with:
