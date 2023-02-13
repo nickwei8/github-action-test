@@ -1,0 +1,11 @@
+name: Leaked Secrets Scan
+on: [pull_request]
+jobs:
+  test-sha:
+    runs-on: ubuntu-latest
+    steps:
+      - id: get-sha
+        run: echo ${{ github.event.pull_request.head.sha }}
+      - id: get-sha-1
+        run: echo $GITHUB_SHA
+
